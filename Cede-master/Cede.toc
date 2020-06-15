@@ -1,0 +1,9 @@
+## Interface: 20400
+## Title: Cede
+## Author: Siggelicious
+## Notes: CD tracker.
+## SavedVariables: CedeOptions
+
+Cede.xml
+Cede.lua
+CedeOptions.lua

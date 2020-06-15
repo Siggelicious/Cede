@@ -1,0 +1,1 @@
+local function print(msg) DEFAULT_CHAT_FRAME:AddMessage("Cede: " .. msg) end

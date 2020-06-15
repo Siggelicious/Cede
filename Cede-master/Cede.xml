@@ -1,0 +1,89 @@
+<Ui>
+	<Cooldown name="CedeTimerTemplate" virtual="true" hidden="true">
+		<Size x="32" y="32"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentBorder" file="Interface\AddOns\Cede\border">
+					<!-- <TexCoords left="0.03125" right="0.96875" top="0.03125" bottom="0.96875"/> -->
+				</Texture>
+			</Layer>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentIcon">
+					<Color g="1.0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Cooldown>
+
+	<Frame name="CedeOptionsPanelTemplate" virtual="true">
+		<Frames>
+			<Slider 
+				name="$parentOffsetSlider" 
+				inherits="OptionsSliderTemplate" 
+				minValue="-300.0" 
+				maxValue="300.0" 
+				defaultValue="0.0" 
+				valueStep="10.0" 
+				enableMouse="true">
+				<Size x="200" y="17"/>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset y="-20"/>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString font="GameFontNormal" text="Offset">
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset x="-50" y="0"/>
+								</Anchor> 
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Slider>
+			<Slider 
+				name="$parentScaleSlider" 
+				inherits="OptionsSliderTemplate" 
+				minValue="0.5" 
+				maxValue="1.5" 
+				defaultValue="1" 
+				valueStep="0.1" 
+				enableMouse="true">
+				<Size x="200" y="17"/>
+				<Anchors>
+					<Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentOffsetSlider">
+						<Offset y="-40"/>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString font="GameFontNormal" text="Scale">
+							<Anchors>
+								<Anchor point="LEFT">
+									<Offset x="-50" y="0"/>
+								</Anchor> 
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Slider>
+			<Button name="$parentTestButton" inherits="OptionsButtonTemplate" text="Test">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset x="20" y="20"/>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				CedeOptionsPanel_OnLoad(self)
+			</OnLoad>
+			<OnEvent>
+				CedeOptionsPanel_VARIABLES_LOADED(self)
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>
