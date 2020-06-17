@@ -35,13 +35,73 @@ local CedeDefaults = {
 		[29166] = 360,
 		[16689] = 60,
 		[8042] = 6,
-		[23920] = 10
+		[23920] = 10,
+		[3034] = 15,
+		[100] = 15
 	},
 	["options"] = {
 		["scale"] = 1,
 		["yOffs"] = -200
 	}
 }
+
+---------
+
+SLASH_CEDE1 = "/cede"
+
+function SlashCmdList.CEDE(arg1, arg2)
+	local action, id, cd = strsplit(" ", arg1, 3)
+	local err = 0
+	id = tonumber(id)
+	cd = tonumber(cd)
+
+	if action == "add" then 
+		if id and cd then
+			if not CedeOptions["ids"][id] then
+				if GetSpellInfo(id) then
+					CedeOptions["ids"][id] = cd
+					print(GetSpellInfo(id) .. " has been added.")
+				else
+					err = 4
+				end
+			else
+			 	err = 2 
+			end
+		else
+			err = 1
+		end
+	elseif action == "remove" then
+		if id then
+			if CedeOptions["ids"][id] then
+				CedeOptions["ids"][id] = nil
+				print(GetSpellInfo(id) .. " has been removed.")
+			else
+			 	err = 3
+			end
+		else
+			err = 1
+		end
+	else 
+		err = 1
+	end
+	if err ~= 0 then
+		if err == 1 then
+			print("Invalid syntax, use '/cede <add, remove> <id> <cd>'.")
+		elseif err == 2 then
+			print("The spell is already registered.")
+		elseif err == 3 then
+			print("The spell is not registered.")
+		elseif err == 4 then
+			print("The spell does not exist.")
+		else
+			print("An unknown error occurred.")
+		end
+	else
+		print("Reload for changes to take effect.")
+	end
+end
+
+---------
 
 local CedeTimers = {}
 

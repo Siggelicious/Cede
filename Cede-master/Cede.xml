@@ -20,8 +20,8 @@
 			<Slider 
 				name="$parentOffsetSlider" 
 				inherits="OptionsSliderTemplate" 
-				minValue="-300.0" 
-				maxValue="300.0" 
+				minValue="-500.0" 
+				maxValue="500.0" 
 				defaultValue="0.0" 
 				valueStep="10.0" 
 				enableMouse="true">
