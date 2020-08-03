@@ -45,6 +45,25 @@ local CedeDefaults = {
 	}
 }
 
+local CedeResetters = {
+	["Preparation"] = {
+		"Vanish",
+		"Sprint",
+		"Evasion",
+		"Cold Blood",
+		"Shadowstep",
+		"Premeditation"
+	},
+	["Cold Snap"] = {
+		"Ice Block",
+		"Ice Barrier",
+		"Frost Nova",
+		"Icy Veins",
+		"Frost Ward",
+		"Cone of Cold"
+	}
+}
+
 ---------
 
 SLASH_CEDE1 = "/cede"
@@ -151,6 +170,10 @@ local function CedeStartTimer(spellName)
 	CedeUpdatePos()
 end
 
+local function CedeStopTimer(spellName)
+	CedeTimers[spellName]:Hide()
+end
+
 local function CedeTimerOnHide(self)
 	CedeGetActiveTimers()
 	CedeUpdatePos()
@@ -207,8 +230,14 @@ local function CedeBar_COMBAT_LOG_EVENT_UNFILTERED(self, ...)
 
 	if bit.band(srcFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) > 0 and eventType == "SPELL_CAST_SUCCESS" then 
 		if CedeTimers[spellName] then
-
 			CedeStartTimer(spellName)
+		end
+		if CedeResetters[spellName] then
+			for i = 1, #CedeResetters[spellName] do
+				if CedeTimers[CedeResetters[spellName][i]] then
+					CedeStopTimer(CedeResetters[spellName][i])
+				end
+			end 
 		end
 	end
 end
